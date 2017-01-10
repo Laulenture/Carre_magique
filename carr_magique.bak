@@ -1,0 +1,110 @@
+program carre_magique;
+
+uses crt;
+
+procedure afficher(var taille, x, y, tableau);
+	
+BEGIN
+    FOR x:= 1 TO taille DO
+        Begin
+			for y:=1 to taille do
+			Begin
+				tableau[x,y]:=0;
+				write(tableau[x,y]);
+            end;
+            writeln;
+        end;
+	end;
+END;
+
+procedure initialisation(var nb, max);
+
+BEGIN
+	clrscr;
+	nb := 1
+	REPEAT
+		writeln('choisissez la taille du tableau entre 5 et 7');
+		readln(taille);
+	UNTIL taille = 5 OR 7
+	max := taille * taille
+
+END;
+
+procedure placer(var x, y, taille, tableau);
+
+BEGIN
+	IF nb := 5 THEN
+                BEGIN
+		        x := 3;
+		        y := 2;
+		        tableau[x,y] := nb;
+		END;
+        ELSE
+		BEGIN
+		        x := 4;
+		        y := 3;
+		        tableau[x,y] := nb;
+		END;
+	END;
+END;
+
+procedure verifierVide(var x, y, tableau);
+
+BEGIN
+	IF tableau[x+1,y-1] = 0 THEN
+		avancerGauche(x, y, nb, tableau);
+	ELSE
+		avanceDroite(x, y, nb, tableau);
+	END;
+END;
+
+procedure avancerGauche(var x, y, nb, tableau);
+
+BEGIN
+	x := x + 1;
+	y := y - 1;
+	IF taille := 5 THEN
+		IF y := 0 THEN y := 5
+	ELSE
+		IF y := 0 THEN y := 7
+	END;
+	IF taille := 5 THEN
+		IF x := 6 THEN x := 1
+	ELSE
+		IF x := 8 THEN x := 1
+	END;
+    tableau[x,y] := nb;
+END;
+
+procedure avanceDroite(var x, y, nb, tableau);
+
+BEGIN
+	x := x - 1;
+	y := y - 1;
+	IF taille := 5 THEN
+		IF y := 0 THEN y := 5
+	ELSE
+		IF y := 0 THEN y := 7
+	END;
+	IF taille := 5 THEN
+		IF x := 0 THEN x := 5
+	ELSE
+		IF x := 0 THEN x := 7
+	END;
+	tableau[x,y] := nb;
+END;
+
+VAR
+	nb, x, y, taille, max : INTEGER;
+	tableau : array[1..7,1..7] OF INTEGER;
+
+BEGIN
+	clrscr;
+	initialisation(nb, max);
+	placer(x, y, taille, tableau);
+	REPEAT
+		verifierVide(x, y, tableau);
+	UNTIL nb = max;
+	afficher(taille, x, y, tableau);
+	readln();
+END.
